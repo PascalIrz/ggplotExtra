@@ -1,0 +1,17 @@
+Package: ggplotExtra
+Type: Package
+Title: Extras for ggplot diagrams
+Version: 0.1.0
+Author: Pascal Irz <pascal.irz@ofb.gouv.fr>
+Maintainer: Pascal Irz <pascal.irz@ofb.gouv.fr>
+Description: Customised ggplot diagrams for specific usage.
+License: GPL (>= 3)
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.2.1
+Imports: dplyr,
+    ggplot2,
+    magrittr
+Suggests: 
+    knitr,
+    rmarkdown
