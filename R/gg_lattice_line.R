@@ -9,6 +9,7 @@
 #' @param free_y Boolean. If TRUE, the y axis scale can vary across elementary plots.
 #'     If FALSE (default), the y axis scale is identical across elementary plots.
 #' @param lab_x,lab_y String. Axis labels.
+#' @param mean_color,line_color String. Colors for the horizontal mean and the diagram geom_line().
 #'
 #' @return The ggplot lattice diagram.
 #' @export
@@ -71,8 +72,10 @@ gg_lattice_line <- function(df,
                             threshold_x = NULL,
                             display_mean = TRUE,
                             free_y = FALSE,
-                            lab_x,
-                            lab_y)
+                            lab_x = NULL,
+                            lab_y = NULL,
+                            mean_color = "red",
+                            line_color = "black")
 {
   # managing lazy eval
   var_x <- enquo(var_x)
@@ -116,10 +119,12 @@ gg_lattice_line <- function(df,
     geom_line(data = df1,
               aes(x = !!var_x,
                   y = !!var_y),
-              linetype = "dotted") +
+              linetype = "dotted",
+              col = line_color) +
     geom_line(data = df2,
               aes(x = !!var_x,
-                  y = !!var_y)) +
+                  y = !!var_y),
+              col = line_color) +
     guides(color = "none") +
     labs(x = lab_x,
          y = lab_y) +
@@ -144,7 +149,7 @@ gg_lattice_line <- function(df,
         xend = max_x,
         yend = means
       ),
-      col = "red"
+      col = mean_color
     )
   }
   g

@@ -12,8 +12,10 @@ gg_lattice_line(
   threshold_x = NULL,
   display_mean = TRUE,
   free_y = FALSE,
-  lab_x,
-  lab_y
+  lab_x = NULL,
+  lab_y = NULL,
+  mean_color = "red",
+  line_color = "black"
 )
 }
 \arguments{
@@ -30,6 +32,8 @@ Typically used to distinguish time periods of distinct data reliability.}
 If FALSE (default), the y axis scale is identical across elementary plots.}
 
 \item{lab_x, lab_y}{String. Axis labels.}
+
+\item{mean_color, line_color}{String. Colors for the horizontal mean and the diagram geom_line().}
 }
 \value{
 The ggplot lattice diagram.
@@ -39,16 +43,48 @@ Lattice diagram with ggplot with display options
 }
 \examples{
 \dontrun{
-load(file = "tables_aspe.RData")
-data <- classe_ipr \%>\%
-  ipr_completer_classes_couleur()
+# install / load packages
+install_github("PascalIrz/aspe")
+library(aspe)
+library(tidyverse)
 
-ipr_data \%>\%
-  gg_temp_ipr(var_id_sta = pop_libelle,
-              var_ipr = ipr,
-              station_sel = mes_pops,
-              nb_colonnes = 4,
-              max_axe_y = 60,
-              inv_y = FALSE)
+# load data (can be downloaded from https://zenodo.org/record/7099129)
+load(file = "tables_aspe.RData")
+
+# create appropiiate dataframe
+my_station <- 10734
+
+my_surveys <- mef_creer_passerelle() \%>\%
+  filter(sta_id == my_station) \%>\%
+  mef_ajouter_ope_date() \%>\%
+  select(ope_id,
+         annee) \%>\%
+  distinct() \%>\%
+  filter(annee > 1999)
+
+my_data <- operation_description_peche \%>\%
+  inner_join(my_surveys, by = c("odp_ope_id" = "ope_id")) \%>\%
+  select(annee,
+         odp_duree_peche,
+         odp_longueur,
+         odp_largeur_lame_eau,
+         odp_temperature_instantanee,
+         odp_conductivite,
+         odp_tension,
+         odp_intensite,
+         odp_puissance) \%>\%
+  pivot_longer(odp_duree_peche:odp_puissance,
+               names_to = "variable",
+               values_to = "value")
+
+# plot the diagram
+gg_lattice_line(df = my_data,
+                var_x = annee,
+                var_y = value,
+                var_lattice = variable,
+                threshold_x = 2010,
+                free_y = TRUE,
+                lab_x = "",
+                lab_y = "")
 }
 }
