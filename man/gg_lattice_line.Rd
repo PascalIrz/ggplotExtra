@@ -12,6 +12,7 @@ gg_lattice_line(
   threshold_x = NULL,
   display_mean = TRUE,
   free_y = FALSE,
+  nb_colonnes = 3,
   lab_x = NULL,
   lab_y = NULL,
   mean_color = "red",
@@ -30,6 +31,9 @@ Typically used to distinguish time periods of distinct data reliability.}
 
 \item{free_y}{Boolean. If TRUE, the y axis scale can vary across elementary plots.
 If FALSE (default), the y axis scale is identical across elementary plots.}
+
+\item{nb_colonnes}{Entier. Nombre (maxi) de colonnes de graphiques s'il y a plusieurs stations.
+Par défaut nb_colonnes = 4.}
 
 \item{lab_x, lab_y}{String. Axis labels.}
 

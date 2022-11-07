@@ -64,8 +64,6 @@ Parfois utile pour la mise en forme de l'axe des abscisses (années).}
 \item{largeur, hauteur}{largeur et hauteur du graphique interactif (en pouces). Cela définit les dimensions relatives du graphique.}
 
 \item{options}{liste d'options utilisée pour le rendu du graphique interactif (voir \code{\link[ggiraph]{girafe}})}
-
-\item{station_sel}{Vecteur caractère indiquant les points ou stations à sélectionner.}
 }
 \value{
 Un graphique statique ggplot2 ou un graphique interactif girafe.

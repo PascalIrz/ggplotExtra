@@ -8,6 +8,8 @@
 #' @param display_mean Boolean. Horizontal line for y mean value?
 #' @param free_y Boolean. If TRUE, the y axis scale can vary across elementary plots.
 #'     If FALSE (default), the y axis scale is identical across elementary plots.
+#' @param nb_colonnes Entier. Nombre (maxi) de colonnes de graphiques s'il y a plusieurs stations.
+#'     Par défaut nb_colonnes = 4.
 #' @param lab_x,lab_y String. Axis labels.
 #' @param mean_color,line_color String. Colors for the horizontal mean and the diagram geom_line().
 #'
@@ -72,6 +74,7 @@ gg_lattice_line <- function(df,
                             threshold_x = NULL,
                             display_mean = TRUE,
                             free_y = FALSE,
+                            nb_colonnes = 3,
                             lab_x = NULL,
                             lab_y = NULL,
                             mean_color = "red",
@@ -132,10 +135,12 @@ gg_lattice_line <- function(df,
 
   # if free_y
   if(!free_y)
-  {g <- g + facet_wrap(facets = var_lattice)
+  {g <- g + facet_wrap(facets = var_lattice,
+                       ncol = nb_colonnes)
   } else {
     g <- g + facet_wrap(facets = var_lattice,
-                        scales = "free_y")
+                        scales = "free_y",
+                        ncol = nb_colonnes)
   }
 
   # if display_mean
