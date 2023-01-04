@@ -49,7 +49,7 @@
 #'               var_y = ipr,
 #'               station_sel = mes_pops,
 #'               nb_colonnes = 4,
-#'               max_axe_y = 60,
+#'               max_axe_y = 8,
 #'               inv_y = FALSE)
 #' }
 gg_lattice_ipr <- function(df,
@@ -58,7 +58,7 @@ gg_lattice_ipr <- function(df,
                            sup_500m = FALSE,
                            metriques = FALSE,
                            nb_colonnes = 3,
-                           max_axe_y = 8,
+                           max_axe_y = NULL,
                            inv_y = TRUE,
                            annee_facteur = FALSE,
                            titre_graphique = "",
@@ -91,6 +91,14 @@ gg_lattice_ipr <- function(df,
   # sélection des données
   var_lattice <- enquo(var_lattice)
   var_y <- enquo(var_y)
+
+  if(is.null(max_axe_y))
+  {
+    max_axe_y <- df %>%
+      pull(!!var_y) %>%
+      max(na.rm = TRUE)
+  }
+
 
   # if(!is.na(station_sel))
   # {
