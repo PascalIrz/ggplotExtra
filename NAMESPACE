@@ -2,6 +2,7 @@
 
 export(gg_lattice_ipr)
 export(gg_lattice_line)
+export(gg_lattice_point)
 importFrom(aspe,gg_gerer_seuils_classes_ipr_int)
 importFrom(dplyr,case_when)
 importFrom(dplyr,enquo)

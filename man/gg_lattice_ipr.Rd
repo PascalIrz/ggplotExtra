@@ -11,7 +11,7 @@ gg_lattice_ipr(
   sup_500m = FALSE,
   metriques = FALSE,
   nb_colonnes = 3,
-  max_axe_y = 8,
+  max_axe_y = NULL,
   inv_y = TRUE,
   annee_facteur = FALSE,
   titre_graphique = "",
@@ -82,7 +82,7 @@ ipr_data \%>\%
               var_y = ipr,
               station_sel = mes_pops,
               nb_colonnes = 4,
-              max_axe_y = 60,
+              max_axe_y = 8,
               inv_y = FALSE)
 }
 }

@@ -171,7 +171,8 @@ gg_lattice_ipr <- function(df,
       xmax = Inf,
       alpha = 0.3
     ) +
-    ggplot2::scale_fill_manual(values = df_classes$classe_couleur) +
+    ggplot2::scale_fill_manual(values = df_classes$classe_couleur,
+                               limits = df_classes$classe_libelle) +
     scale_x_continuous(breaks = int_breaks,
                        limits = int_limits) +
     ggplot2::scale_y_continuous(trans = "reverse",
